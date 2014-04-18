@@ -1,0 +1,17 @@
+{
+  "name": "cartapush",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "xmldom": "^0.1.19",
+    "moment-timezone": "0.0.5",
+    "through": "^2.3.4",
+    "sse-stream": "0.0.4"
+  }
+}

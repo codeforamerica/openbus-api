@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <buses rt="33">
+
+    <time>5:37 PM</time>
+
+
+    <bus>
+      <id>727</id>    
+      <rt>33</rt>
+      <rtdd>33</rtdd>
+      
+      <d>South Bound</d>
+      <dd>Inbound</dd>
+      <dn>S</dn>
+      <lat>35.05324425330529</lat>
+      <lon>-85.31087881234976</lon>
+      <pid>247</pid>
+      <pd>Inbound</pd>
+      <run>4</run>
+      <fs>SHUTTLE PARK SOUTH</fs>
+      <op>160725</op>
+      <dip>477</dip>
+      <bid>23355402</bid>
+      <wid1>02</wid1>
+      <wid2>004</wid2>              
+    </bus>
+
+
+
+    <bus>
+      <id>726</id>    
+      <rt>33</rt>
+      <rtdd>33</rtdd>
+      
+      <d>North Bound</d>
+      <dd>Outbound</dd>
+      <dn>N</dn>
+      <lat>35.03903483333333</lat>
+      <lon>-85.30757216666666</lon>
+      <pid>156</pid>
+      <pd>Outbound</pd>
+      <run>8</run>
+      <fs>SHUTTLE PARK NORTH</fs>
+      <op>160769</op>
+      <dip>642</dip>
+      <bid>2335302</bid>
+      <wid1>02</wid1>
+      <wid2>008</wid2>              
+    </bus>
+
+
+
+    <bus>
+      <id>719</id>    
+      <rt>33</rt>
+      <rtdd>33</rtdd>
+      
+      <d>North West Bound</d>
+      <dd>Outbound</dd>
+      <dn>NNW</dn>
+      <lat>35.03990173339844</lat>
+      <lon>-85.3077163696289</lon>
+      <pid>156</pid>
+      <pd>Outbound</pd>
+      <run>7</run>
+      <fs>SHUTTLE PARK NORTH</fs>
+      <op>160761</op>
+      <dip>815</dip>
+      <bid>2335202</bid>
+      <wid1>02</wid1>
+      <wid2>007</wid2>              
+    </bus>
+
+
+
+    <bus>
+      <id>717</id>    
+      <rt>33</rt>
+      <rtdd>33</rtdd>
+      
+      <d>South Bound</d>
+      <dd>Inbound</dd>
+      <dn>S</dn>
+      <lat>35.03926021647903</lat>
+      <lon>-85.3076297112231</lon>
+      <pid>247</pid>
+      <pd>Inbound</pd>
+      <run>9</run>
+      <fs>SHUTTLE PARK SOUTH</fs>
+      <op>160808</op>
+      <dip>6927</dip>
+      <bid>2335402</bid>
+      <wid1>02</wid1>
+      <wid2>009</wid2>              
+    </bus>
+
+
+
+    <bus>
+      <id>720</id>    
+      <rt>33</rt>
+      <rtdd>33</rtdd>
+      
+      <d>North Bound</d>
+      <dd>Outbound</dd>
+      <dn>NNE</dn>
+      <lat>35.05375033333333</lat>
+      <lon>-85.31165616666667</lon>
+      <pid>156</pid>
+      <pd>Outbound</pd>
+      <run>6</run>
+      <fs>SHUTTLE PARK NORTH</fs>
+      <op>160729</op>
+      <dip>8358</dip>
+      <bid>2335102</bid>
+      <wid1>02</wid1>
+      <wid2>006</wid2>              
+    </bus>
+
+
+
+  </buses>
