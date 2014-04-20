@@ -13,6 +13,7 @@
     "xmldom": "^0.1.19",
     "indexed-array": "^0.1.2",
     "lodash": "^2.4.1",
-    "event-source-writer": "^0.1.1"
+    "event-source-writer": "^0.1.1",
+    "pr-request": "^0.1.1"
   }
 }
