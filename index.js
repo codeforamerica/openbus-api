@@ -1,19 +1,43 @@
-var state = {}
+var EventSourceWriter = require('event-source-writer')
+var state = {
+  changes: new EventSourceWriter
+}
 
-var poll = require('./poll')
-var parse = require('./parser')
+var $port = process.env.port || 8081
+
+var Clock = require('./clock')
+var fetch = require('./fetch')
+var parser = require('./parser')
 var diff = require('./diff')
-var push = require('./push')
+var trigger = require('./trigger')
 
-var httpServer = require('./static')(state)
-var stringify = require('./stringify')
+var http = require('./http')(state)
+
+var url = 'http://bustracker.gocarta.org/bustime/map/getBusesForRouteAll.jsp'
+
+url += '?' + require('querystring').stringify({
+  key: Math.random().toString()
+})
 
 
-
-poll(6e3)
-  .pipe(parse.stream())
+new Clock(6e3)
+  // .pipe(trigger(function fakeData(cb) {
+  //   cb(null,
+  //     require('fs')
+  //       .readFileSync('./buses.xml')
+  //       .toString()
+  //     )
+  // }))
+  .pipe(fetch(url))
+  .pipe(parser())
   .pipe(diff(state))
-  .pipe(stringify)
-  .pipe(push(httpServer))
+  .on('data', function (event) {
+    state.changes.dispatchEvent(event)
+  })
 
-httpServer.listen(8081)
+
+http.listen($port, function () {
+  console.log('listening on ' + $port)
+})
+
+//state.changes.pipe(process.stdout)

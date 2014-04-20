@@ -1,17 +1,17 @@
 {
   "name": "cartapush",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "jden <jason@denizac.org>",
+  "license": "MIT",
   "dependencies": {
     "xmldom": "^0.1.19",
-    "moment-timezone": "0.0.5",
-    "through": "^2.3.4",
-    "sse-stream": "0.0.4"
+    "indexed-array": "^0.1.2",
+    "lodash": "^2.4.1",
+    "event-source-writer": "^0.1.1"
   }
 }
