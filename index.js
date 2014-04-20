@@ -3,7 +3,7 @@ var state = {
   changes: new EventSourceWriter
 }
 
-var $port = process.env.port || 8081
+var $port = process.env.PORT || 8081
 
 var Clock = require('./clock')
 var fetch = require('./fetch')
