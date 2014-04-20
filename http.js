@@ -1,19 +1,19 @@
 var http = require('http')
 var sseSerialize = require('event-source-writer').serialize
 
+const BOM = '\ufeff'
+
 function server(state) {
 
   var serv = http.createServer(function (req, res) {
     
     if (req.url == '/buses') {
-      return getBuses(req, res, state)
+      getBuses(req, res, state)
+    } else if (req.url == '/buses/tail') {
+      tailBuses(req, res, state)
+    } else {
+      defaultRoute(req, res)
     }
-
-    if (req.url == '/buses/tail') {
-      return tailBuses(req, res, state)
-    }
-
-    defaultRoute(req, res)
 
     console.log(Date.now(), req.method, req.url, req.headers['user-agent'])
   })
@@ -34,13 +34,18 @@ function tailBuses(req, res, state) {
 
   var contentType = req.headers.accept.indexOf('text/event-stream') >= 0
     ? 'text/event-stream'
-    : 'text/plain'
+    : 'text/plain; charset=UTF-8'
 
   res.writeHead(200, {
     'content-type': contentType,
     'access-control-allow-origin': '*',
-    'access-control-allow-methods': 'GET'
+    'access-control-allow-methods': 'GET',
+    'x-content-type-options': 'nosniff'
   })
+
+  // get browsers to Do The Right Thing(tm)
+  // see https://code.google.com/p/chromium/issues/detail?id=106150
+  res.write(BOM)
 
   res.write(':connected\n\n')
 
