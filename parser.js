@@ -41,14 +41,57 @@ function parse(xml) {
   return parsed
 }
 
-module.exports = parse
+function toGeoJSON(buses) {
+  return FeatureCollection(
+    buses.map(function (bus) {
+      return Feature(
+          Point(bus.lon, bus.lat),
+          {
+            color: bus.color,
+            route: bus.route,
+            routeDirection: bus.routeDirection,
+            direction: bus.direction,
+            heading: bus.heading,
+            stop: bus.stop
+          },
+          bus.id
+        )
+      })
+    )
+}
+
+function FeatureCollection(features) {
+  return {
+    type: 'FeatureCollection',
+    features: [].concat(features || [])
+  }
+}
+
+function Feature(geometry, properties, id) {
+  var feature = {
+    type: 'Feature',
+    geometry: geometry,
+    properties: properties || {}
+  }
+  if (typeof id !== 'undefined') {
+    feature.id = id
+  }
+  return feature
+}
+
+function Point(x, y) {
+  return {
+    type: 'Point',
+    coordinates: [parseFloat(x), parseFloat(y)]
+  }
+}
 
 var Transform = require('stream').Transform
 
 function parser() {
   var transform = new Transform({objectMode:true})
   transform._transform = function (chunk, encoding, cb) {
-    var parsed = parse(chunk)
+    var parsed = toGeoJSON(parse(chunk))
     // console.log('parsed', parsed)
     transform.push(parsed)
 
