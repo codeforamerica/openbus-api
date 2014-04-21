@@ -4,6 +4,8 @@ an EventSource-enabled API wrapper for the CARTA streaming API.
 
 ## Further documentation forthcoming
 
+### Basic Usage:
+
 `/buses` is a static JSON response with the latest information from
 CARTA. Unfortunately, there's no indication of a timestamp for when
 information was last received from the bus. The buses which show up on
@@ -26,6 +28,11 @@ with three types of events:
 
 -   `remove` when a bus goes out of service and information about that
     bus is no longer available from CARTA.
+
+###Apps built so far include:
+
+-   [https://github.com/acedrew/chab.us-maps](https://github.com/acedrew/chab.us-maps)
+-   [https://github.com/jden/silly-little-bus-radar](https://github.com/jden/silly-little-bus-radar)
 
 
 ## License
