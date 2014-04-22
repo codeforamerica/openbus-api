@@ -11,7 +11,7 @@ function DiffStream(state) {
   diff._transform = function (data, enc, cb) {
     state.parsed = data
     state.prev = state.curr
-    state.curr = new IndexedArray(data, index)
+    state.curr = new IndexedArray(data.features, index)
 
 
     var prevIds = state.prev.map(to('id'))
@@ -21,8 +21,8 @@ function DiffStream(state) {
     _.difference(currIds, prevIds)
       .forEach(function (id) {
         diff.push({
-          type: 'add',
-          bus: state.curr['#'+id]
+          event: 'add',
+          data: state.curr['#'+id]
         })
       })
 
@@ -30,8 +30,8 @@ function DiffStream(state) {
     _.difference(prevIds, currIds)
       .forEach(function (id) {
         diff.push({
-          type: 'remove',
-          bus: {id: id}
+          event: 'remove',
+          data: {id: id}
         })
       })
 
@@ -44,8 +44,8 @@ function DiffStream(state) {
         for (var key in curr) {
           if (curr[key] !== prev[key]) {
             diff.push({
-              type: 'change',
-              bus: curr
+              event: 'change',
+              data: curr
             })
             break;
           }

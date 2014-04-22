@@ -2,7 +2,9 @@
 
 an EventSource-enabled API wrapper for the CARTA streaming API.
 
-## Further documentation forthcoming
+## Unstable
+
+There's a very good chance the JSON structure of the current endpoints will be changing to better support GeoJSON. This API should currently be considered unstable. *Any apps you build off of it right now will probably break*
 
 ### Basic Usage:
 

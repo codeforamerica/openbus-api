@@ -49,11 +49,8 @@ function tailBuses(req, res, state) {
 
   res.write(':connected\n\n')
 
-  state.parsed.forEach(function (parsed) {
-    res.write(sseSerialize({
-      type: 'add',
-      bus: parsed
-    }))
+  state.parsed.features.forEach(function (feature) {
+    res.write(sseSerialize('add', feature))
   })
 
   state.changes.pipe(res)
