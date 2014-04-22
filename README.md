@@ -4,7 +4,10 @@ an EventSource-enabled API wrapper for the CARTA streaming API.
 
 ## Unstable
 
-There's a very good chance the JSON structure of the current endpoints will be changing to better support GeoJSON. This API should currently be considered unstable. *Any apps you build off of it right now will probably break*
+
+~~There's a very good chance the JSON structure of the current endpoints will be changing to better support GeoJSON.~~
+GeoJSON support has been implemented.
+This API should currently be considered unstable. *Any apps you build off of it right now will probably break*
 
 ### Basic Usage:
 
@@ -14,6 +17,36 @@ information was last received from the bus. The buses which show up on
 here should all be currently active, as far as I can tell from the data
 source. Throughout the day, buses will be added and removed from this
 list automatically.
+
+Sample Output:
+```
+{
+    features: [
+        {
+            geometry: {
+                coordinates: [
+                    -85.2699145,
+                    35.05605216666667
+                ],
+                type: Point
+            },
+            id: 118,
+            properties: {
+                color: #FFFFFF,
+                direction: North East Bound,
+                heading: NNE,
+                route: PI,
+                routeDirection: N/A,
+                stop: N/A
+            },
+            type: Feature
+        }
+        ],
+    "type": "FeatureCollection"
+}
+```
+
+ 
 
 `/buses/tail` is a [server-sent events
 stream](https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events#Event_stream_format)
@@ -31,11 +64,36 @@ with three types of events:
 -   `remove` when a bus goes out of service and information about that
     bus is no longer available from CARTA.
 
+```
+event: change
+data:
+{
+    "geometry": {
+        "coordinates": [
+            -85.26986016666666, 
+            35.05618
+        ], 
+        "type": "Point"
+    }, 
+    "id": "125", 
+    "properties": {
+        "color": "#FFFFFF", 
+        "direction": "North East Bound", 
+        "heading": "NNE", 
+        "route": "PI", 
+        "routeDirection": "N/A", 
+        "stop": "N/A"
+    }, 
+    "type": "Feature"
+}
+
+```
+
 ###Apps built so far include:
 
 -   [https://github.com/acedrew/chab.us-maps](https://github.com/acedrew/chab.us-maps)
 -   [https://github.com/jden/silly-little-bus-radar](https://github.com/jden/silly-little-bus-radar)
-
+-   [https://github.com/jden/bus-sim](https://github.com/jden/bus-sim)
 
 ## License
 MIT
