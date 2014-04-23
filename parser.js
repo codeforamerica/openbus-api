@@ -6,6 +6,25 @@ var slice = function (arr) {
 
 const ELEMENT = 1
 
+const headings = {
+  'S'  : 180,
+  'SSW': 202.5,
+  'SW' : 225,
+  'WSW': 247.5,
+  'W'  : 270,
+  'WNW': 292.5,
+  'NW' : 315,
+  'NNW': 337.5,
+  'N'  : 0,
+  'NNE': 22.5,
+  'NE' : 45,
+  'ENE': 67.5,
+  'E'  : 90,
+  'ESE': 112.5,
+  'SE' : 135,
+  'SSE': 157.5 
+}
+
 const propMap = {
   id: 'id',
   c: 'color',
@@ -52,6 +71,7 @@ function toGeoJSON(buses) {
             routeDirection: bus.routeDirection,
             direction: bus.direction,
             heading: bus.heading,
+            headingDegrees: headings[bus.heading],
             stop: bus.stop
           },
           bus.id
