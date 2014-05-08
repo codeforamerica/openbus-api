@@ -4,6 +4,10 @@ var sseSerialize = require('event-source-writer').serialize
 
 var fs = require('fs')
 var stops = JSON.parse(fs.readFileSync('./node_modules/data-carta-routes/stops.geojson').toString())
+var stopsIndex = stops.features.reduce(function (a, f) {
+  a[f.id] = f
+  return a
+}, {})
 
 const BOM = '\ufeff'
 
@@ -23,8 +27,10 @@ function server(state) {
 
 
   router.addRoute('/buses', getBuses(state))
+  router.addRoute('/buses/:id', getBus(state))
   router.addRoute('/buses/tail', tailBuses(state))
   router.addRoute('/stops', getStops)
+  router.addRoute('/stops/:id', getStop)
 
   router.addRoute('*', defaultRoute)
 
@@ -35,6 +41,22 @@ function getBuses(state) {
   return function (req, res) {
     res.setHeader('content-type', 'application/json')
     res.end(JSON.stringify(state.parsed))  
+  }
+}
+
+function getBus(state) {
+  return function (req, res, opts) {
+    
+    var bus = first(state.parsed.features, function (x) { return x.id === opts.id })
+
+    if (!bus) {
+      res.statusCode = 404
+      res.end('no such bus')
+      return
+    }
+
+    res.setHeader('content-type', 'application/json')
+    res.end(JSON.stringify(bus))
   }
 }
 
@@ -80,6 +102,26 @@ function defaultRoute(req, res) {
 function getStops(req, res) {
   res.setHeader('content-type','application/json')
   res.end(JSON.stringify(stops))
+}
+
+function getStop(req, res, opts) {
+  var stop = stopsIndex[opts.id]
+  if (!stop) {
+    res.statusCode = 404
+    res.end('no stuch stop')
+    return
+  }
+  
+  res.setHeader('content-type','application/json')
+  res.end(JSON.stringify(stop))
+}
+
+function first(arr, fn) {
+  for (var i = 0; i < arr.length; i++) {
+    if (fn(arr[i])) {
+      return arr[i]
+    }
+  }
 }
 
 module.exports = server
