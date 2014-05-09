@@ -68,7 +68,7 @@ function toGeoJSON(buses) {
           {
             color: bus.color,
             route: bus.route,
-            routeDirection: bus.routeDirection,
+            routeDirection: bus.routeDirection.replace(/(\[|\])/g,''),
             direction: bus.direction,
             heading: bus.heading,
             headingDegrees: headings[bus.heading],
