@@ -1,6 +1,7 @@
 var DOMParser = require('xmldom').DOMParser
 var request = require('pr-request')
 require('polyfill-promise')
+var memoize = require('memoizee')
 
 function times(stop) {
   return request('http://bustracker.gocarta.org/bustime/eta/getStopPredictionsETA.jsp?route=all&stop='+stop+'&key=0.37306588678620756')
@@ -41,8 +42,13 @@ function times(stop) {
 
 }
 
+
+
+var MINUTE = 60e3
+var timesCached = memoize(times, {maxAge: MINUTE})
+
 function getArrivalsForStops(stops) {
-  return Promise.all(stops.map(times))
+  return Promise.all(stops.map(timesCached))
     .then(flatten)
 }
 
@@ -53,6 +59,3 @@ function flatten(arr) {
 }
 
 module.exports = getArrivalsForStops
-
-getArrivalsForStops([18, 424])
-  .then(console.log)

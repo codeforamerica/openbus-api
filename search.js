@@ -10,22 +10,12 @@ require('polyfill-promise')
 
 var stops = JSON.parse(fs.readFileSync('./node_modules/data-carta-routes/stops.geojson').toString())
 
-
-
 var store = new GeoStore({
   store: new MemStore,
   index: new RTree
 })
 
-var origin = [
-          -85.24205625057198,
-          35.130943203476
-        ]
-
-store.add(stops, function (err, res) {
-  console.log(err ? 'err' : 'res')
-  // console.log(res)
-})
+store.add(stops, function (err, res) {})
 
 function searchStops(origin, maxDistance) {
   return new Promise(function (resolve, reject) {
@@ -40,7 +30,6 @@ function searchStops(origin, maxDistance) {
       })
 
       res = _.sortBy(res, 'distance')
-      console.log(res)
       resolve(res)
     })
 
