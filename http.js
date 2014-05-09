@@ -134,7 +134,7 @@ function searchStops(req, res) {
     .then(function (stops) {
       var response = {
         type: 'FeatureCollection',
-        lenth: stops.length,
+        length: stops.length,
         features: stops
       }
       res.setHeader('content-type','application/json')
