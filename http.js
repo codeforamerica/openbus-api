@@ -1,6 +1,8 @@
 var http = require('http')
 var Router = require('routes-router')
 var sseSerialize = require('event-source-writer').serialize
+var url = require('url')
+var search = require('./search')
 
 var fs = require('fs')
 var stops = JSON.parse(fs.readFileSync('./node_modules/data-carta-routes/stops.geojson').toString())
@@ -30,6 +32,7 @@ function server(state) {
   router.addRoute('/buses/:id', getBus(state))
   router.addRoute('/buses/tail', tailBuses(state))
   router.addRoute('/stops', getStops)
+  router.addRoute('/stops/near', searchStops)
   router.addRoute('/stops/:id', getStop)
 
   router.addRoute('*', defaultRoute)
@@ -114,6 +117,29 @@ function getStop(req, res, opts) {
   
   res.setHeader('content-type','application/json')
   res.end(JSON.stringify(stop))
+}
+
+function searchStops(req, res) {
+  var params = url.parse(req.url, true).query
+  console.log('p', params)
+  try {
+    var lat = parseFloat(params.lat)
+    var lon = parseFloat(params.lon)
+  } catch (e) {
+    res.statusCode = 400
+    res.end('missing required querystring parameters lat and lon (as floats)')
+    return
+  }
+  search.stops([lon, lat], 500)
+    .then(function (stops) {
+      var response = {
+        type: 'FeatureCollection',
+        lenth: stops.length,
+        features: stops
+      }
+      res.setHeader('content-type','application/json')
+      res.end(JSON.stringify(response, null, 2))
+    })
 }
 
 function first(arr, fn) {
