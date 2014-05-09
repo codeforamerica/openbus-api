@@ -30,8 +30,8 @@ function server(state) {
 
 
   router.addRoute('/buses', getBuses(state))
-  router.addRoute('/buses/:id', getBus(state))
   router.addRoute('/buses/tail', tailBuses(state))
+  router.addRoute('/buses/:id', getBus(state))
   router.addRoute('/stops', getStops)
   router.addRoute('/stops/near', searchStops)
   router.addRoute('/stops/:id', getStop)

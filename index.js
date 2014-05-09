@@ -20,20 +20,20 @@ url += '?' + require('querystring').stringify({
 })
 
 
-// new Clock(6e3)
-//   // .pipe(trigger(function fakeData(cb) {
-//   //   cb(null,
-//   //     require('fs')
-//   //       .readFileSync('./buses.xml')
-//   //       .toString()
-//   //     )
-//   // }))
-//   .pipe(fetch(url))
-//   .pipe(parser())
-//   .pipe(diff(state))
-//   .on('data', function (event) {
-//     state.changes.dispatchEvent(event)
-//   })
+new Clock(6e3)
+  // .pipe(trigger(function fakeData(cb) {
+  //   cb(null,
+  //     require('fs')
+  //       .readFileSync('./buses.xml')
+  //       .toString()
+  //     )
+  // }))
+  .pipe(fetch(url))
+  .pipe(parser())
+  .pipe(diff(state))
+  .on('data', function (event) {
+    state.changes.dispatchEvent(event)
+  })
 
 
 http.listen($port, function () {
