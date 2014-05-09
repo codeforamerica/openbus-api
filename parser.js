@@ -50,7 +50,7 @@ function parse(xml) {
       slice(child.childNodes).forEach(function (prop) {
         if (prop.nodeType !== ELEMENT) { return }
         if (prop.nodeName in propMap) {
-          bus[propMap[prop.nodeName]] = prop.textContent
+          bus[propMap[prop.nodeName]] = prop.textContent.trim()
         }
       })
       parsed.push(bus)
