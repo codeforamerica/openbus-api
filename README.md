@@ -124,4 +124,4 @@ busStream.addEventListener('remove', function (e) {
 -   [https://github.com/jden/bus-sim](https://github.com/jden/bus-sim)
 
 ## License
-MIT
+Copyright (c) 2014, Code for America. ISC license.
