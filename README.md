@@ -4,6 +4,11 @@ a developer-friendly, open-source bus and transit api
 Currently being developed with CARTA in Chattanooga, Tennessee, USA.
 
 
+## Install
+
+Openbus-API is a Node.js application. Get started by [installing Node](https://github.com/codeforamerica/howto/blob/master/Node.js.md) on your development environment, and then [use the included Procfile](https://github.com/codeforamerica/howto/blob/master/Procfile.md) to run.
+
+
 ## Unstable
 
 
