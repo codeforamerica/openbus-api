@@ -1,6 +1,8 @@
-# carta-streaming-api
+# openbus-api
+a developer-friendly, open-source bus and transit api
 
-an EventSource-enabled API wrapper for the CARTA streaming API.
+Currently being developed with CARTA in Chattanooga, Tennessee, USA.
+
 
 ## Unstable
 
